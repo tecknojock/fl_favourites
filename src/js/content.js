@@ -16,25 +16,25 @@ async function init() {
 
   const event = new CustomEvent("PlayingFavouritesLoad");
   window.dispatchEvent(event);
-  
+
   window.addEventListener("PlayingFavouritesLoad", suicide, false);
 
   console.log(`Playing Favourites ${version} injected`);
-  
+
   wrapObserver = new MutationSummary({
     rootNode: document.getElementById("root"),
     callback: async function(summaries) {
       if (summaries[0].added.length === 1) {
-        await loadData()
+        await loadData();
         await registerObserver();
       }
     },
     queries: [{element: "#main"}]
   });
-  
+
   // True in case of reinject
   if (document.getElementById("main")) {
-    await loadData()
+    await loadData();
     await registerObserver();
   }
 }
@@ -50,7 +50,7 @@ async function registerObserver() {
       parseStorylets(true);
       parseCards();
     },
-    queries: [{ attribute: "data-branch-id" }, { attribute: "data-card-id" }, { attribute: "disabled"}] 
+    queries: [{ attribute: "data-branch-id" }, { attribute: "data-card-id" }, { attribute: "disabled"}]
   });
   fillClickHandlers();
   parseStorylets(true);
@@ -284,7 +284,7 @@ function parseCards() {
 }
 
 async function onStorageChange(changes, area) {
-  if (area === "local") { 
+  if (area === "local") {
     await loadData();
     parseStorylets();
     parseCards();
@@ -326,10 +326,10 @@ function protectAvoids(e) {
       $(e.target).append($confirmText);
       $(e.target).addClass('button-protected');
       setTimeout(
-        function() { 
+        function() {
           $(e.target).removeClass('button-protected');
-          $confirmText.remove(); 
-        }, 
+          $confirmText.remove();
+        },
         options.protectInterval
       );
 

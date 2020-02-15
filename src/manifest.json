@@ -43,7 +43,7 @@
     "unlimitedStorage",
     "*://*.fallenlondon.com/*"
   ],
-  
+
   "minimum_chrome_version": "49",
 
   "options_ui": {
