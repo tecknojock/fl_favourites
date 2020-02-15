@@ -21,10 +21,6 @@ $(document).ready(function() {
     $("#changelogText").text(text);
   });
 
-  if (window.browser) { // Firefox
-    $("#rate_chrome").hide();
-  }
-
   $("#optionsContainer").show();
 
   $("#changelogLink").click(function() {
