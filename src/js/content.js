@@ -86,7 +86,7 @@ function fillClickHandlers() {
 
 function parseStorylets(reorder = false) { // Call without options to ensure no reordering
   let $container = $("#main");
-  let $branches = $("#main .media--branch");
+  let $branches = $("#main .\\.media--branch");
   let $storylets = $("#main .storylet");
 
   let reorder_active = false;

@@ -1,5 +1,7 @@
 # Playing Favourites for Fallen London 
 
+Forked from [kav2k](https://github.com/kav2k/fl_favourites)
+
 An unofficial,
 [whitelisted](http://community.failbettergames.com/topic9506-fallen-london-extensions-whitelist.aspx)
 browser extension for Fallen London that desktop users can use to mark branches, storylets and cards as favourite or avoided.

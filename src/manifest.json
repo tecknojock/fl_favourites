@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
 
-  "name": "Playing Favourites for Fallen London",
-  "short_name": "Playing Favourites",
+  "name": "Playing Favourites for Fallen London Forked",
+  "short_name": "Playing Favourites Forked",
   "description": "Unofficial Fallen London extension to quickly choose favourite branches",
 
-  "version": "0.4.0",
+  "version": "0.4.1",
 
   "icons": {
     "16" : "img/icon16.png",
