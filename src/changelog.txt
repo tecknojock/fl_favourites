@@ -1,3 +1,7 @@
+Version 0.4.2
+
+* card buttons fixed
+
 Version 0.4.1
 
 * branches selector fixed
