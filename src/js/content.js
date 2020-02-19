@@ -50,7 +50,7 @@ async function registerObserver() {
       parseStorylets(true);
       parseCards();
     },
-    queries: [{ attribute: "data-branch-id" }, { attribute: "data-card-id" }, { attribute: "disabled"}]
+    queries: [{ attribute: "data-branch-id" }, { attribute: "data-event-id" }, { attribute: "disabled"}]
   });
   fillClickHandlers();
   parseStorylets(true);
@@ -233,6 +233,7 @@ function parseStorylets(reorder = false) { // Call without options to ensure no 
 }
 
 function parseCards() {
+  const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
   // full-sized cards
   let $cards = $("#main .hand__card-container, #main .small-card-container");
@@ -246,12 +247,13 @@ function parseCards() {
     if (match) {
       const cardId = parseInt(match);
 
-      $(this).children(".card_toggle_button").remove();
+      $(this).find(".card_toggle_button").remove();
 
       if (this.offsetParent === null) { return; } // Fix for Protector extensions
 
       let $toggle_button = $('<button class="card_toggle_button" title="Playing Favourites: toggle favourite" />');
-        if ($(this).hasClass('hand__card-container')) {
+
+      if ($(this).hasClass('hand__card-container')) {
         $(this).append($toggle_button);
       } else {
         $(this).find('.buttons').append($toggle_button);
@@ -263,19 +265,31 @@ function parseCards() {
 
       let $card_discard = $(this).find('.card__discard-button, .buttonlet-delete');
 
+      const ffCardFaveClass = isFirefox ? 'firefox_card_fave' : '';
+      const ffCardAvoidClass = isFirefox ? 'firefox_card_avoid' : '';
+      const ffCardEmptyClass = isFirefox ? 'firefox_card_empty' : '';
+
+      $(this).addClass(ffCardEmptyClass);
+
       if (card_avoids.has(cardId)) {
         $(this).removeClass("card_fave");
         $(this).addClass("card_avoid");
+        $(this).removeClass(ffCardFaveClass);
+        $(this).addClass(ffCardAvoidClass);
         $card_discard.addClass('button_fave');
         $card_discard.removeClass('button_avoid');
       } else if (card_faves.has(cardId)) {
         $(this).addClass("card_fave");
         $(this).removeClass("card_avoid");
+        $(this).removeClass(ffCardAvoidClass);
+        $(this).addClass(ffCardFaveClass);
         $card_discard.removeClass('button_fave');
         $card_discard.addClass('button_avoid');
       } else {
         $(this).removeClass("card_fave");
         $(this).removeClass("card_avoid");
+        $(this).removeClass(ffCardFaveClass);
+        $(this).removeClass(ffCardAvoidClass);
         $card_discard.removeClass('button_fave');
         $card_discard.removeClass('button_avoid');
       }
