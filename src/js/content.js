@@ -247,7 +247,7 @@ function parseCards() {
     if (match) {
       const cardId = parseInt(match);
 
-      $(this).children(".card_toggle_button").remove();
+      $(this).find(".card_toggle_button").remove();
 
       if (this.offsetParent === null) { return; } // Fix for Protector extensions
 
