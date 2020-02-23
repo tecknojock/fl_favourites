@@ -13,6 +13,6 @@ Features:
 
 Fallen London [forum thread](http://community.failbettergames.com/topic21968-chrome-extension-playing-favourites.aspx).
 
-### Currently released for Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/playing-favourites-for-fa/mcaahfdpnojmloiekappdkeafmhdmfhd)
-
-### Porting in progress for Firefox.
+### Download:
+#### [Chrome](https://chrome.google.com/webstore/detail/fallen-london-favourites/jkaoljkdjoecocmlnncdljoeeijlcjao)
+#### [Firefox](https://addons.mozilla.org/ru/firefox/addon/fallen-london-favourites/)
