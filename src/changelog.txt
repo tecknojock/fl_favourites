@@ -1,3 +1,7 @@
+Version 0.4.4
+
+* previous branches selector fix reversed as FB fixed it from their side
+
 Version 0.4.3
 
 * card displacement on the right side fixed
