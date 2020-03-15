@@ -18,6 +18,9 @@ async function init() {
   window.dispatchEvent(event);
 
   window.addEventListener("PlayingFavouritesLoad", suicide, false);
+  window.addEventListener("keydown", shiftHandler, false);
+  window.addEventListener("keypress", shiftHandler, false);
+  window.addEventListener("keyup", shiftHandler, false);
 
   console.log(`Playing Favourites ${version} injected`);
 
@@ -84,6 +87,21 @@ function fillClickHandlers() {
   });
 }
 
+function shiftHandler(e) {
+  const shiftPressed = e.shiftKey;
+  const $disabled = $("#main .pf-disabled");
+
+  if ($disabled.length) {
+    $disabled.each(function () {
+      if (shiftPressed) {
+        $(this).addClass("shift-pressed");
+      } else {
+        $(this).removeClass("shift-pressed");
+      }
+    });
+  }
+}
+
 function parseStorylets(reorder = false) { // Call without options to ensure no reordering
   let $container = $("#main");
   let $branches = $("#main .media--branch");
@@ -133,14 +151,38 @@ function parseStorylets(reorder = false) { // Call without options to ensure no 
           $(this).addClass("storylet_favourite");
           $(this).removeClass("storylet_avoid");
           $toggle_button.attr("src", chrome.runtime.getURL("img/button_filled.png"));
+
+          if (options.block_action) {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          } else {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          }
         } else if (branch_avoids.has(branchId)) {
           $(this).removeClass("storylet_favourite");
           $(this).addClass("storylet_avoid");
           $toggle_button.attr("src", chrome.runtime.getURL("img/button_avoid.png"));
+
+          if (options.block_action) {
+            $(this).find(".button--go").last().addClass("pf-disabled");
+            $(this).find(".button--go").last().addClass("button--disabled");
+          } else {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          }
         } else {
           $(this).removeClass("storylet_favourite");
           $(this).removeClass("storylet_avoid");
           $toggle_button.attr("src", chrome.runtime.getURL("img/button_empty.png"));
+
+          if (options.block_action) {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          } else {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          }
         }
       }
     });
@@ -182,14 +224,39 @@ function parseStorylets(reorder = false) { // Call without options to ensure no 
           $(this).addClass("storylet_favourite");
           $(this).removeClass("storylet_avoid");
           $toggle_button.attr("src", chrome.runtime.getURL("img/button_filled.png"));
+
+          if (options.block_action) {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          } else {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          }
         } else if (storylet_avoids.has(storyletId)) {
           $(this).removeClass("storylet_favourite");
           $(this).addClass("storylet_avoid");
           $toggle_button.attr("src", chrome.runtime.getURL("img/button_avoid.png"));
+
+          if (options.block_action) {
+            $(this).find(".button--go").last().addClass("pf-disabled");
+            $(this).find(".button--go").last().addClass("button--disabled");
+          } else {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          }
+          console.log(2);
         } else {
           $(this).removeClass("storylet_favourite");
           $(this).removeClass("storylet_avoid");
           $toggle_button.attr("src", chrome.runtime.getURL("img/button_empty.png"));
+
+          if (options.block_action) {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          } else {
+            $(this).find(".button--go").last().removeClass("pf-disabled");
+            $(this).find(".button--go").last().removeClass("button--disabled");
+          }
         }
       }
     });
@@ -278,6 +345,20 @@ function parseCards() {
         $(this).addClass(ffCardAvoidClass);
         $card_discard.addClass('button_fave');
         $card_discard.removeClass('button_avoid');
+
+        if (options.block_action) {
+          $(this).find(".card__discard-button").last().removeClass("pf-disabled");
+          $(this).find(".card__discard-button").last().removeClass("button--disabled");
+          $(this).find(".button--margin").last().addClass("pf-disabled");
+          $(this).find(".hand__card").last().addClass("pf-disabled");
+          $(this).find(".buttonlet-delete").last().removeClass("pf-disabled");
+        } else {
+          $(this).find(".card__discard-button").last().removeClass("pf-disabled");
+          $(this).find(".card__discard-button").last().removeClass("button--disabled");
+          $(this).find(".button--margin").last().removeClass("pf-disabled");
+          $(this).find(".hand__card").last().removeClass("pf-disabled");
+          $(this).find(".buttonlet-delete").last().addClass("pf-disabled");
+        }
       } else if (card_faves.has(cardId)) {
         $(this).addClass("card_fave");
         $(this).removeClass("card_avoid");
@@ -285,6 +366,20 @@ function parseCards() {
         $(this).addClass(ffCardFaveClass);
         $card_discard.removeClass('button_fave');
         $card_discard.addClass('button_avoid');
+
+        if (options.block_action) {
+          $(this).find(".card__discard-button").last().addClass("pf-disabled");
+          $(this).find(".card__discard-button").last().addClass("button--disabled");
+          $(this).find(".button--margin").last().removeClass("pf-disabled");
+          $(this).find(".hand__card").last().removeClass("pf-disabled");
+          $(this).find(".buttonlet-delete").last().addClass("pf-disabled");
+        } else {
+          $(this).find(".card__discard-button").last().removeClass("pf-disabled");
+          $(this).find(".card__discard-button").last().removeClass("button--disabled");
+          $(this).find(".button--margin").last().addClass("pf-disabled");
+          $(this).find(".hand__card").last().removeClass("pf-disabled");
+          $(this).find(".buttonlet-delete").last().removeClass("pf-disabled");
+        }
       } else {
         $(this).removeClass("card_fave");
         $(this).removeClass("card_avoid");
@@ -292,6 +387,12 @@ function parseCards() {
         $(this).removeClass(ffCardAvoidClass);
         $card_discard.removeClass('button_fave');
         $card_discard.removeClass('button_avoid');
+
+        $(this).find(".card__discard-button").last().removeClass("pf-disabled");
+        $(this).find(".card__discard-button").last().removeClass("button--disabled");
+        $(this).find(".button--margin").last().removeClass("pf-disabled");
+        $(this).find(".hand__card").last().removeClass("pf-disabled");
+        $(this).find(".buttonlet-delete").last().removeClass("pf-disabled");
       }
     }
   });
@@ -317,6 +418,7 @@ async function loadData() {
 
   options.branch_reorder_mode = data.branch_reorder_mode;
   options.switch_mode = data.switch_mode;
+  options.block_action = data.block_action === "true";
   options.protectInterval = 2000; // TODO: Make configurable
 
   // initializeProtector(); // TODO: Finish implementation

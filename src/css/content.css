@@ -15,6 +15,17 @@
   width: 30px;
 }
 
+#main .pf-disabled {
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
+#main .pf-disabled.shift-pressed {
+  pointer-events: auto;
+  cursor: pointer;
+  filter: none;
+}
+
 #main .storylet_anchor {
   display: none;
 }

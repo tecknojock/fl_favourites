@@ -7,7 +7,7 @@ Set.prototype.pack = function(storage_key) {
   let total = source.length;
   let keys = [];
   let result = {};
-  
+
   for (let index = 0; index * MAX_MAP_ITEMS_PER_KEY < total; index++) {
     result[`${storage_key}_${index}`] = source.slice(
       index * MAX_MAP_ITEMS_PER_KEY,
@@ -35,6 +35,7 @@ function unpackSet(data, storage_key) {
 var default_options = {
   branch_reorder_mode: "branch_reorder_active",
   switch_mode: "click_through",
+  block_action: "false",
 
   branch_faves_keys: [],
   branch_avoids_keys: [],
