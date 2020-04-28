@@ -187,14 +187,14 @@ function parseStorylets(reorder = false) { // Call without options to ensure no 
       }
     });
 
-    $branches.first().parent().before('<div class="first_reorder_marker">');
+    $branches.first().before('<div class="first_reorder_marker">');
     $first = $(".first_reorder_marker");
 
-    $branches.last().parent().after('<div class="last_reorder_marker">');
+    $branches.last().after('<div class="last_reorder_marker">');
     $last = $(".last_reorder_marker");
 
     if ($branches.not(".media--locked").last().length) {
-      $branches.not(".media--locked").last().parent().after('<div class="last_active_reorder_marker">');
+      $branches.not(".media--locked").last().after('<div class="last_active_reorder_marker">');
       $last_active = $(".last_active_reorder_marker");
     } else {
       $last_active = $last;
@@ -244,7 +244,6 @@ function parseStorylets(reorder = false) { // Call without options to ensure no 
             $(this).find(".button--go").last().removeClass("pf-disabled");
             $(this).find(".button--go").last().removeClass("button--disabled");
           }
-          console.log(2);
         } else {
           $(this).removeClass("storylet_favourite");
           $(this).removeClass("storylet_avoid");
@@ -280,19 +279,27 @@ function parseStorylets(reorder = false) { // Call without options to ensure no 
 
   if ($faves && $faves.length) {
     if (reorder_locked) {
-      $faves.filter(".media--locked").parent().insertBefore($first);
+      $branches.length ?
+          $faves.filter(".media--locked").insertBefore($first) :
+          $faves.filter(".media--locked").parent().insertBefore($first);
     }
     if (reorder_active) {
-      $faves.not(".media--locked").parent().insertBefore($first);
+      $branches.length ?
+          $faves.not(".media--locked").insertBefore($first) :
+          $faves.not(".media--locked").parent().insertBefore($first);
     }
   }
 
   if ($avoids && $avoids.length) {
     if (reorder_locked) {
-      $avoids.filter(".media--locked").parent().insertAfter($last_active);
+      $branches.length ?
+          $avoids.filter(".media--locked").insertAfter($last_active) :
+          $avoids.filter(".media--locked").parent().insertAfter($last_active);
     }
     if (reorder_active) {
-      $avoids.not(".media--locked").parent().insertAfter($last_active);
+      $branches.length ?
+          $avoids.not(".media--locked").insertAfter($last_active) :
+          $avoids.not(".media--locked").parent().insertAfter($last_active);
     }
   }
 
