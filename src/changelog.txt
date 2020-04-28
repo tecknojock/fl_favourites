@@ -1,3 +1,7 @@
+Version 0.5.1
+
+* Branch sorting fixed
+
 Version 0.5.0
 
 * In extension settings you now can choose to disable discard and action buttons for storylets and cards.
