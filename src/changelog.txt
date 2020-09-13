@@ -1,3 +1,7 @@
+Version 0.5.2
+
+* storylets mark and sorting fix
+
 Version 0.5.1
 
 * Branch sorting fixed
